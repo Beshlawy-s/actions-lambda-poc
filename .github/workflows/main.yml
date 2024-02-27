@@ -32,4 +32,4 @@ jobs:
         aws s3 cp lambda_function.zip s3://actions-lambda-poc
     - name: Update Lambda function
       run : |
-        aws lambda update-function-code --function-name ${{ secrets.AWS_LAMBDA }} --s3-bucket ${{ secrets.AWS_S3_BUCKET }} --s3-key "./" --region us-west-2
+        aws lambda update-function-code --function-name ${{ secrets.AWS_LAMBDA }} --s3-bucket ${{ secrets.AWS_S3_BUCKET }} --s3-key "lambda_function.zip" --region us-west-2
