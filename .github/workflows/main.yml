@@ -8,8 +8,8 @@ env:
   AWS_DEFAULT_REGION: us-west-2
 
 jobs:
-  push-to-s3:
-    name: push-to-s3
+  update-lambda:
+    name: update-lambda
     runs-on: ubuntu-latest
     environment: test
     permissions:
@@ -32,4 +32,4 @@ jobs:
         aws s3 cp lambda_function.zip s3://actions-lambda-poc
     - name: Update Lambda function
       run : |
-        aws lambda update-function-code --function-name secrets.AWS_LAMBDA --s3-bucket secrets.AWS_S3_BUCKET --region us-west-2
+        aws lambda update-function-code --function-name ${{ secrets.AWS_LAMBDA }} --s3-bucket ${{ secrets.AWS_S3_BUCKET }} --region us-west-2
