@@ -34,6 +34,7 @@ runs:
     shell: bash
     run: |
       zip lambda_function.zip lambda_function.py
+      echo $AWS_ACCOUNT_ID
   - name: Configure AWS Credentials
     uses: aws-actions/configure-aws-credentials@v4
     with:
