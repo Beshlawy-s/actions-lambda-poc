@@ -12,9 +12,9 @@ permissions:
   contents: read
 
 jobs:
-  update-lambda-test:
+  update-lambda:
     runs-on: ubuntu-latest
-    environment: ${{ github.ref }}
+    environment: ${{ github.ref == 'refs/heads/release' && 'prod' || 'test' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
