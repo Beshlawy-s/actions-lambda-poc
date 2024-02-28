@@ -33,11 +33,11 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-region: us-west-2
-        role-to-assume: arn:aws:iam::${{ inputs.aws-account-id }}:role/${{ inputs.aws-role-name }}
+        role-to-assume: arn:aws:iam::1213232323:role/${{ inputs.aws-role-name }}
         role-session-name: myGitHubActions
     - name: Copy files to S3 bucket
       run: |
         aws s3 cp lambda_function.zip s3://actions-lambda-poc
     - name: Update Lambda function
       run : |
-        aws lambda update-function-code --function-name ${{ inputs.aws-lambda-name }} --s3-bucket ${{ inputs.aws-s3-bucket-name }} --s3-key "lambda_function.zip" --region $AWS_DEFAULT_REGION
+        aws lambda update-function-code --function-name hello --s3-bucket ${{ inputs.aws-s3-bucket-name }} --s3-key "lambda_function.zip" --region $AWS_DEFAULT_REGION
