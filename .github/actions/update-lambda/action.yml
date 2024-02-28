@@ -31,8 +31,8 @@ runs:
   - name: Configure AWS Credentials
     uses: aws-actions/configure-aws-credentials@v4
     env:
-      AWS_ACCOUNT_ID: {{ inputs.aws-account-id }}
-      AWS_ROLE_NAME: {{ inputs.aws-role-name }}
+      AWS_ACCOUNT_ID: ${{ inputs.aws-account-id }}
+      AWS_ROLE_NAME: ${{ inputs.aws-role-name }}
       AWS_DEFAULT_REGION: us-west-2
     with:
       aws-region: $AWS_DEFAULT_REGION
@@ -41,14 +41,14 @@ runs:
   - name: Copy files to S3 bucket
     shell: bash
     env:
-      AWS_S3_BUCKET_NAME: {{ inputs.aws-s3-bucket-name }}
+      AWS_S3_BUCKET_NAME: ${{ inputs.aws-s3-bucket-name }}
     run: |
       aws s3 cp lambda_function.zip s3://$AWS_S3_BUCKET_NAME
   - name: Update Lambda function
     shell: bash
     env:
-      AWS_LAMBDA_NAME: {{ inputs.aws-lambda-name }}
-      AWS_S3_BUCKET_NAME: {{ inputs.aws-s3-bucket-name }}
+      AWS_LAMBDA_NAME: ${{ inputs.aws-lambda-name }}
+      AWS_S3_BUCKET_NAME: ${{ inputs.aws-s3-bucket-name }}
       AWS_DEFAULT_REGION: us-west-2
     run : |
       aws lambda update-function-code --function-name $AWS_LAMBDA_NAME --s3-bucket $AWS_S3_BUCKET_NAME --s3-key "lambda_function.zip" --region $AWS_DEFAULT_REGION
