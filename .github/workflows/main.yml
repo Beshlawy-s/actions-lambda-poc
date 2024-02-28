@@ -3,13 +3,13 @@ name: Update Lambda
 
 jobs:
   update-lambda-test:
-    if: github.GITHUB_REF_NAME == 'main'
+    if: if: github.ref == 'refs/heads/main'
     name: update-lambda-test
     environment: test
     uses: Beshlawy's/actions-lambda-poc/.github/workflows/template.yml@main
 
   update-lambda-prod:
-    if: github.GITHUB_REF_NAME == 'release'
+    if: if: github.ref == 'refs/heads/release'
     name: update-lambda-prod
     environment: prod
     uses: Beshlawy's/actions-lambda-poc/.github/workflows/template.yml@release
