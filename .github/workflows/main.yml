@@ -6,10 +6,10 @@ jobs:
     if: if: github.ref == 'refs/heads/main'
     name: update-lambda-test
     environment: test
-    uses: Beshlawy's/actions-lambda-poc/.github/workflows/template.yml@main
+    uses: Beshlawy-s/actions-lambda-poc/.github/workflows/template.yml@main
 
   update-lambda-prod:
     if: if: github.ref == 'refs/heads/release'
     name: update-lambda-prod
-    environment: prod
-    uses: Beshlawy's/actions-lambda-poc/.github/workflows/template.yml@release
+    - uses: Beshlawy-s/actions-lambda-poc/.github/workflows/template.yml@release
+      environment: prod
