@@ -33,9 +33,6 @@ runs:
       echo $AWS_ACCOUNT_ID
   - name: Configure AWS Credentials
     uses: aws-actions/configure-aws-credentials@v4
-    env:
-      AWS_ACCOUNT_ID: ${{ inputs.aws-account-id }}
-      AWS_ROLE_NAME: ${{ inputs.aws-role-name }}
     with:
       aws-region: us-west-2
       role-to-assume: arn:aws:iam::166845317680:role/actions_s3_lambda
