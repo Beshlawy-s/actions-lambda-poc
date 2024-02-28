@@ -10,6 +10,7 @@ jobs:
 
   update-lambda-prod:
     if: github.ref == 'refs/heads/release'
+    environment: prod
     name: update-lambda-prod
-    - uses: Beshlawy-s/actions-lambda-poc/.github/workflows/template.yml@release
-      environment: prod
+    uses: Beshlawy-s/actions-lambda-poc/.github/workflows/template.yml@release
+      
