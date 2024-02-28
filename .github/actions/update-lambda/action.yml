@@ -5,6 +5,7 @@ inputs:
   aws-account-id:
     description: 'AWS Account ID'
     required: true
+    default: 232434
   aws-role-name:
     description: 'AWS Role Name'
     required: true
