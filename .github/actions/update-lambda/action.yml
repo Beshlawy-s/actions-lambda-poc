@@ -21,10 +21,11 @@ inputs:
     description: 'AWS S3 Bucket Name'
     required: true
 
+permissions:
+  id-token: write
+  contents: read
+
 runs:
-  permissions:
-    id-token: write
-    contents: read
   steps:
   - name: Checkout
     uses: actions/checkout@v3
