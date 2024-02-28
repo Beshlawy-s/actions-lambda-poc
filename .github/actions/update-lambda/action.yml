@@ -30,15 +30,18 @@ runs:
   - name: Checkout
     uses: actions/checkout@v3
   - name: Compress code files
+    shell: bash
     run: |
       zip lambda_function.zip lambda_function.py
   - name: Configure AWS Credentials
     uses: aws-actions/configure-aws-credentials@v4
+    shell: bash
     with:
       aws-region: us-west-2
       role-to-assume: arn:aws:iam::$AWS_DEFAULT_REGION:role/$AWS_ROLE_NAME
       role-session-name: myGitHubActions
   - name: Copy files to S3 bucket
+    shell: bash
     run: |
       aws s3 cp lambda_function.zip s3://actions-lambda-poc
   - name: Update Lambda function
