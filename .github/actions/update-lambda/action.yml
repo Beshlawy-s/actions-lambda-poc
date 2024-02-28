@@ -38,7 +38,7 @@ runs:
     uses: aws-actions/configure-aws-credentials@v4
     with:
       aws-region: us-west-2
-      role-to-assume: arn:aws:iam::$AWS_DEFAULT_REGION:role/$AWS_ROLE_NAME
+      role-to-assume: arn:aws:iam::$AWS_ACCOUNT_ID:role/$AWS_ROLE_NAME
       role-session-name: myGitHubActions
   - name: Copy files to S3 bucket
     shell: bash
