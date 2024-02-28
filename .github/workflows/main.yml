@@ -12,9 +12,9 @@ permissions:
   contents: read
 
 jobs:
-  update-lambda:
+  update-lambda-test:
     runs-on: ubuntu-latest
-    environment: ${{ github.ref_name }}
+    environment: ${{ github.ref }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -25,4 +25,3 @@ jobs:
           aws-role-name: ${{ secrets.AWS_ROLE_NAME }}
           aws-lambda-name: ${{ secrets.AWS_LAMBDA_NAME }}
           aws-s3-bucket-name: ${{ secrets.AWS_S3_BUCKET_NAME }}
-
