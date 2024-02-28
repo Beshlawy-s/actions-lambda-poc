@@ -16,7 +16,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Use Update Lambda Template
-        uses: ./.github/actions/update-lambda/action.yml
+        uses: ./.github/actions/update-lambda
 
   update-lambda-prod:
     if: github.ref == 'refs/heads/release'
@@ -26,4 +26,4 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Use Update Lambda Template
-        uses: ./.github/actions/update-lambda/action.yml
+        uses: ./.github/actions/update-lambda
