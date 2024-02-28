@@ -23,6 +23,8 @@ jobs:
     permissions:
       id-token: write
       contents: read
+    env:
+      aws-account-id: github.event.inputs.aws-account-id
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -33,7 +35,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-region: us-west-2
-        role-to-assume: arn:aws:iam::${{ github.event.inputs.aws-account-id }}:role/${{ github.event.inputs.aws-role-name }}
+        role-to-assume: arn:aws:iam::${{ env.aws-account-id }}:role/${{ github.event.inputs.aws-role-name }}
         role-session-name: myGitHubActions
     - name: Copy files to S3 bucket
       run: |
