@@ -5,7 +5,6 @@ inputs:
   aws-account-id:
     description: 'AWS Account ID'
     required: true
-    default: 232434
   aws-role-name:
     description: 'AWS Role Name'
     required: true
@@ -39,7 +38,7 @@ runs:
       AWS_ROLE_NAME: ${{ inputs.aws-role-name }}
     with:
       aws-region: us-west-2
-      role-to-assume: arn:aws:iam::$AWS_ACCOUNT_ID:role/$AWS_ROLE_NAME
+      role-to-assume: arn:aws:iam::166845317680:role/actions_s3_lambda
       role-session-name: myGitHubActions
   - name: Copy files to S3 bucket
     shell: bash
