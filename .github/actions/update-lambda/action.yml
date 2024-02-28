@@ -2,6 +2,10 @@
 name: Update Lambda Template
 env:
   AWS_DEFAULT_REGION: us-west-2
+  AWS_ACCOUNT_ID: inputs.aws-account-id
+  AWS_ROLE_NAME: inputs.aws-role-name
+  AWS_LAMBDA_NAME: inputs.aws-lambda-name
+  AWS_S3_BUCKET_NAME: inputs.aws-s3-bucket-name
 
 inputs:
   aws-account-id:
@@ -23,8 +27,6 @@ jobs:
     permissions:
       id-token: write
       contents: read
-    env:
-      aws-account-id: github.event.inputs.aws-account-id
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -35,11 +37,11 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-region: us-west-2
-        role-to-assume: arn:aws:iam::$aws-account-id:role/${{ github.event.inputs.aws-role-name }}
+        role-to-assume: arn:aws:iam::$AWS_DEFAULT_REGION:role/$AWS_ROLE_NAME
         role-session-name: myGitHubActions
     - name: Copy files to S3 bucket
       run: |
         aws s3 cp lambda_function.zip s3://actions-lambda-poc
     - name: Update Lambda function
       run : |
-        aws lambda update-function-code --function-name ${{ github.event.inputs.aws-lambda-name }} --s3-bucket ${{ github.event.inputs.aws-s3-bucket-name }} --s3-key "lambda_function.zip" --region $AWS_DEFAULT_REGION
+        aws lambda update-function-code --function-name $AWS_LAMBDA_NAME --s3-bucket $AWS_S3_BUCKET_NAME --s3-key "lambda_function.zip" --region $AWS_DEFAULT_REGION
