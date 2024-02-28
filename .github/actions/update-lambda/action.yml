@@ -32,7 +32,7 @@ runs:
     uses: aws-actions/configure-aws-credentials@v4
     env:
       AWS_ACCOUNT_ID: ${{ inputs.aws-account-id }}
-      AWS_ROLE_NAME: ${{ inputs.aws-role-name }}us-west-2
+      AWS_ROLE_NAME: ${{ inputs.aws-role-name }}
     with:
       aws-region: us-west-2
       role-to-assume: arn:aws:iam::$AWS_ACCOUNT_ID:role/$AWS_ROLE_NAME
