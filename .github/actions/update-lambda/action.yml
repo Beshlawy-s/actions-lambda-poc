@@ -3,6 +3,20 @@ name: Update Lambda Template
 env:
   AWS_DEFAULT_REGION: us-west-2
 
+inputs:
+  aws-account-id:
+    description: 'AWS Account ID'
+    required: true
+  aws-role-name:
+    description: 'AWS Role Name'
+    required: true
+  aws-lambda-name:
+    description: 'AWS Lambda Name'
+    required: true
+  aws-s3-bucket-name:
+    description: 'AWS S3 Bucket Name'
+    required: true
+
 jobs:
   update-lambda-template:
     runs-on: ubuntu-latest
@@ -19,11 +33,11 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-region: us-west-2
-        role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ROLE_NAME }}
+        role-to-assume: arn:aws:iam::${{ inputs.aws-account-id }}:role/${{ inputs.aws-role-name }}
         role-session-name: myGitHubActions
     - name: Copy files to S3 bucket
       run: |
         aws s3 cp lambda_function.zip s3://actions-lambda-poc
     - name: Update Lambda function
       run : |
-        aws lambda update-function-code --function-name ${{ secrets.AWS_LAMBDA }} --s3-bucket ${{ secrets.AWS_S3_BUCKET }} --s3-key "lambda_function.zip" --region $AWS_DEFAULT_REGION
+        aws lambda update-function-code --function-name ${{ inputs.aws-lambda-name }} --s3-bucket ${{ inputs.aws-s3-bucket-name }} --s3-key "lambda_function.zip" --region $AWS_DEFAULT_REGION
