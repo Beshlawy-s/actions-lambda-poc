@@ -16,7 +16,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Use Update Lambda Template
-        uses: Beshlawy-s/actions-lambda-poc/.github/workflows/template.yml@main
+        uses: ./.github/workflows/template.yml
 
   update-lambda-prod:
     if: github.ref == 'refs/heads/release'
@@ -26,4 +26,4 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Use Update Lambda Template
-        uses: Beshlawy-s/actions-lambda-poc/.github/workflows/template.yml@release
+        uses: ./.github/workflows/template.yml
