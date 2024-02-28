@@ -12,10 +12,9 @@ permissions:
   contents: read
 
 jobs:
-  update-lambda-test:
-    if: github.ref == 'refs/heads/main'
+  update-lambda:
     runs-on: ubuntu-latest
-    environment: test
+    environment: ${{ github.ref_name }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -27,17 +26,3 @@ jobs:
           aws-lambda-name: ${{ secrets.AWS_LAMBDA_NAME }}
           aws-s3-bucket-name: ${{ secrets.AWS_S3_BUCKET_NAME }}
 
-  update-lambda-prod:
-    if: github.ref == 'refs/heads/release'
-    runs-on: ubuntu-latest
-    environment: prod
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Use Update Lambda Template
-        uses: ./.github/actions/update-lambda
-        with:
-          aws-account-id: ${{ secrets.AWS_ACCOUNT_ID }}
-          aws-role-name: ${{ secrets.AWS_ROLE_NAME }}
-          aws-lambda-name: ${{ secrets.AWS_LAMBDA_NAME }}
-          aws-s3-bucket-name: ${{ secrets.AWS_S3_BUCKET_NAME }}
