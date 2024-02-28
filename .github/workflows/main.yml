@@ -1,15 +1,29 @@
 ---
 name: Update Lambda
 
+on:
+  push:
+    branches:
+      - main
+      - release
+
 jobs:
   update-lambda-test:
-    if: if: github.ref == 'refs/heads/main'
-    name: update-lambda-test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
     environment: test
-    uses: Beshlawy's/actions-lambda-poc/.github/workflows/template.yml@main
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Use Update Lambda Template
+        uses: ./.github/workflows/template.yml
 
   update-lambda-prod:
-    if: if: github.ref == 'refs/heads/release'
-    name: update-lambda-prod
+    if: github.ref == 'refs/heads/release'
+    runs-on: ubuntu-latest
     environment: prod
-    uses: Beshlawy's/actions-lambda-poc/.github/workflows/template.yml@release
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Use Update Lambda Template
+        uses: ./.github/workflows/template.yml

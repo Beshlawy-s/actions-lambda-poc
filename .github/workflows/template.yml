@@ -1,10 +1,5 @@
 ---
 name: Update Lambda Template
-on:
-  push:
-    branches:
-      - main
-      - release
 env:
   AWS_DEFAULT_REGION: us-west-2
 
