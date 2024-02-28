@@ -37,6 +37,7 @@ runs:
     env:
       AWS_ACCOUNT_ID: inputs.aws-account-id
       AWS_ROLE_NAME: inputs.aws-role-name
+      AWS_DEFAULT_REGION: us-west-2
   - name: Copy files to S3 bucket
     shell: bash
     run: |
