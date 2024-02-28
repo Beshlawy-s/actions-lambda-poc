@@ -16,7 +16,6 @@ inputs:
     required: true
 
 permissions:
-  id-token: write
   contents: read
 
 runs:
