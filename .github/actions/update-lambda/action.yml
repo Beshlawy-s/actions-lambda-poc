@@ -43,7 +43,7 @@ runs:
     env:
       AWS_S3_BUCKET_NAME: {{ inputs.aws-s3-bucket-name }}
     run: |
-      aws s3 cp lambda_function.zip s3://$AWS_ROLE_NAME
+      aws s3 cp lambda_function.zip s3://$AWS_S3_BUCKET_NAME
   - name: Update Lambda function
     shell: bash
     env:
