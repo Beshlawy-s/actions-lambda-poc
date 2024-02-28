@@ -6,13 +6,13 @@ env:
 inputs:
   aws-account-id:
     description: 'AWS Account ID'
-    required: true
+    required: false
   aws-role-name:
     description: 'AWS Role Name'
     required: true
   aws-lambda-name:
     description: 'AWS Lambda Name'
-    required: true
+    required: false
   aws-s3-bucket-name:
     description: 'AWS S3 Bucket Name'
     required: true
