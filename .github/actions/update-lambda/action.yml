@@ -26,8 +26,11 @@ runs:
     uses: actions/checkout@v3
   - name: Compress code files
     shell: bash
+    env:
+      AWS_ACCOUNT_ID: ${{ inputs.aws-account-id }}
     run: |
       zip lambda_function.zip lambda_function.py
+      echo $AWS_ACCOUNT_ID
   - name: Configure AWS Credentials
     uses: aws-actions/configure-aws-credentials@v4
     env:
