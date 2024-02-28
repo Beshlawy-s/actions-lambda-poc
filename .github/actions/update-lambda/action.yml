@@ -26,12 +26,14 @@ runs:
       AWS_ACCOUNT_ID: ${{ inputs.aws-account-id }}
     run: |
       zip lambda_function.zip lambda_function.py
-      echo $AWS_ACCOUNT_ID
   - name: Configure AWS Credentials
     uses: aws-actions/configure-aws-credentials@v4
+    env:
+      AWS_ACCOUNT_ID: ${{ inputs.aws-account-id }}
+      AWS_ROLE_NAME: ${{ inputs.aws-role-name }}
     with:
       aws-region: us-west-2
-      role-to-assume: arn:aws:iam::166845317680:role/actions_s3_lambda
+      role-to-assume: arn:aws:iam::$AWS_ACCOUNT_ID:role/$AWS_ROLE_NAME
       role-session-name: myGitHubActions
   - name: Copy files to S3 bucket
     shell: bash
