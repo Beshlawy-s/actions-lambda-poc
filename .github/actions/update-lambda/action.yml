@@ -21,27 +21,26 @@ inputs:
     description: 'AWS S3 Bucket Name'
     required: true
 
-jobs:
-  update-lambda-template:
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Compress code files
-      run: |
-        zip lambda_function.zip lambda_function.py
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        aws-region: us-west-2
-        role-to-assume: arn:aws:iam::$AWS_DEFAULT_REGION:role/$AWS_ROLE_NAME
-        role-session-name: myGitHubActions
-    - name: Copy files to S3 bucket
-      run: |
-        aws s3 cp lambda_function.zip s3://actions-lambda-poc
-    - name: Update Lambda function
-      run : |
-        aws lambda update-function-code --function-name $AWS_LAMBDA_NAME --s3-bucket $AWS_S3_BUCKET_NAME --s3-key "lambda_function.zip" --region $AWS_DEFAULT_REGION
+runs:
+  runs-on: ubuntu-latest
+  permissions:
+    id-token: write
+    contents: read
+  steps:
+  - name: Checkout
+    uses: actions/checkout@v3
+  - name: Compress code files
+    run: |
+      zip lambda_function.zip lambda_function.py
+  - name: Configure AWS Credentials
+    uses: aws-actions/configure-aws-credentials@v4
+    with:
+      aws-region: us-west-2
+      role-to-assume: arn:aws:iam::$AWS_DEFAULT_REGION:role/$AWS_ROLE_NAME
+      role-session-name: myGitHubActions
+  - name: Copy files to S3 bucket
+    run: |
+      aws s3 cp lambda_function.zip s3://actions-lambda-poc
+  - name: Update Lambda function
+    run : |
+      aws lambda update-function-code --function-name $AWS_LAMBDA_NAME --s3-bucket $AWS_S3_BUCKET_NAME --s3-key "lambda_function.zip" --region $AWS_DEFAULT_REGION
